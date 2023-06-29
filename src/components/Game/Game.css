@@ -1,5 +1,21 @@
 .game {
-  background-color: lightyellow;
   height: 100vh;
 }
 
+.game-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 75%;
+  margin: 0 auto;
+  padding: 2% 0;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 1%;
+  row-gap: 4%;
+  width: 75%;
+  margin: 0 auto;
+}

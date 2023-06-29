@@ -1,0 +1,12 @@
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2;
+}
+
+.red-timer {
+  color: red;
+  font-weight: bold;
+}
