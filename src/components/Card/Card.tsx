@@ -1,10 +1,10 @@
 import { FC } from "react";
-
 import "./Card.css";
+import { CardImage } from "../index";
 
 interface CardProps {
-  card: { src: string; matched: boolean };
-  handleChoice: (card: { src: string; matched: boolean }) => undefined;
+  card: CardImage;
+  handleChoice: (card: CardImage) => undefined;
   flipped: boolean;
 }
 

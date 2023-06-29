@@ -4,14 +4,8 @@ import Timer from "../Timer/Timer";
 import { Modal, Button } from "react-bootstrap";
 import EndScreen from "../EndScreen/EndScreen";
 import SoundBtn from "../SoundBtn/SoundBtn";
-
 import "./Game.css";
-
-interface CardImage {
-  src: string;
-  matched: boolean;
-  id: number;
-}
+import { CardImage } from "../index";
 
 const cardImages: CardImage[] = [
   { src: "/assets/comet.svg", matched: false, id: 1 },
