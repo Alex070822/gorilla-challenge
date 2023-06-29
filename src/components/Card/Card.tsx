@@ -1,6 +1,14 @@
+import { FC } from "react";
+
 import "./Card.css";
 
-function Card({ card, handleChoice, flipped }) {
+interface CardProps {
+  card: { src: string; matched: boolean };
+  handleChoice: (card: { src: string; matched: boolean }) => undefined;
+  flipped: boolean;
+}
+
+const Card: FC<CardProps> = ({ card, handleChoice, flipped }) => {
   const handleClick = () => {
     handleChoice(card);
   };
@@ -15,6 +23,6 @@ function Card({ card, handleChoice, flipped }) {
       </div>
     </div>
   );
-}
+};
 
 export default Card;

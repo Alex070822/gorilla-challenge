@@ -1,6 +1,12 @@
+import { FC } from "react";
 import "./SoundBtn.css";
 
-const SoundBtn = ({ isSoundOn, handleSoundToggle }) => {
+interface SoundBtnProps {
+  isSoundOn: boolean;
+  handleSoundToggle: () => undefined;
+}
+
+const SoundBtn: FC<SoundBtnProps> = ({ isSoundOn, handleSoundToggle }) => {
   return (
     <div
       className={`sound-btn ${isSoundOn ? "sound-btn-on" : "sound-btn-off"}`}

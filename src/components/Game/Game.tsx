@@ -1,26 +1,33 @@
-import "./Game.css";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Card from "../Card/Card";
 import Timer from "../Timer/Timer";
 import { Modal, Button } from "react-bootstrap";
 import EndScreen from "../EndScreen/EndScreen";
 import SoundBtn from "../SoundBtn/SoundBtn";
 
-const cardImages = [
-  { src: "/assets/comet.svg", matched: false },
-  { src: "/assets/moon.svg", matched: false },
-  { src: "/assets/star.svg", matched: false },
-  { src: "/assets/sun.svg", matched: false },
+import "./Game.css";
+
+interface CardImage {
+  src: string;
+  matched: boolean;
+  id: number;
+}
+
+const cardImages: CardImage[] = [
+  { src: "/assets/comet.svg", matched: false, id: 1 },
+  { src: "/assets/moon.svg", matched: false, id: 2 },
+  { src: "/assets/star.svg", matched: false, id: 3 },
+  { src: "/assets/sun.svg", matched: false, id: 4 },
 ];
 
 const bgAudio = new Audio("/assets/background.mp3");
 const correctAudio = new Audio("/assets/correct.mp3");
 const incorrectAudio = new Audio("/assets/incorrect.mp3");
 
-function Game() {
-  const [cards, setCards] = useState([]);
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
+const Game: FC = () => {
+  const [cards, setCards] = useState<CardImage[]>([]);
+  const [choiceOne, setChoiceOne] = useState<CardImage | null>(null);
+  const [choiceTwo, setChoiceTwo] = useState<CardImage | null>(null);
   const [isSoundOn, setIsSoundOn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -38,8 +45,9 @@ function Game() {
     shuffleCards();
   }, []);
 
-  const handleChoice = (card) => {
+  const handleChoice = (card: CardImage): undefined => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+    return undefined;
   };
 
   const handleCloseModal = () => {
@@ -99,7 +107,7 @@ function Game() {
     };
   }, []);
 
-  const handleSoundToggle = () => {
+  const handleSoundToggle = (): undefined => {
     setIsSoundOn(!isSoundOn);
     if (!isSoundOn) {
       bgAudio.currentTime = 0;
@@ -108,26 +116,38 @@ function Game() {
       bgAudio.currentTime = 0;
       bgAudio.pause();
     }
+    return undefined;
   };
 
   const handleGameEnd = () => {
     setGameEnded(true);
   };
 
+  const resetGame = (): undefined => {
+    setCards([]);
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setIsSoundOn(false);
+    setShowModal(false);
+    setModalMessage("");
+    setGameEnded(false);
+    setAllMatched(false);
+    shuffleCards();
+    return undefined;
+  };
+
   useEffect(() => {
-    if (gameEnded) {
-      if (isSoundOn) {
-        setIsSoundOn(false);
-        bgAudio.currentTime = 0;
-        bgAudio.pause();
-      }
+    if (gameEnded && isSoundOn) {
+      setIsSoundOn(false);
+      bgAudio.currentTime = 0;
+      bgAudio.pause();
     }
   }, [gameEnded, isSoundOn]);
 
   return (
     <div className="game">
       {gameEnded ? (
-        <EndScreen allMatched={allMatched} />
+        <EndScreen allMatched={allMatched} resetGame={resetGame} />
       ) : (
         <div>
           <div className="game-info">
@@ -164,6 +184,6 @@ function Game() {
       )}
     </div>
   );
-}
+};
 
 export default Game;

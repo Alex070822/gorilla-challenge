@@ -1,9 +1,14 @@
+import { FC, useEffect, useState } from "react";
 import "./Timer.css";
-import { useEffect, useState } from "react";
 
 const tickingAudio = new Audio("/assets/ticking.mp3");
 
-const Timer = ({ isSoundOn, handleGameEnd }) => {
+interface TimerProps {
+  isSoundOn: boolean;
+  handleGameEnd: () => void;
+}
+
+const Timer: FC<TimerProps> = ({ isSoundOn, handleGameEnd }) => {
   const [timer, setTimer] = useState(30);
 
   useEffect(() => {
