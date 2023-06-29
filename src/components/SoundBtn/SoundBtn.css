@@ -13,3 +13,15 @@
 .sound-btn-off {
   background-image: url("/assets/sound--off.svg");
 }
+
+@media (max-width: 480px) {
+  .sound-btn {
+    width: 32%;
+  }
+}
+
+@media (min-width: 481px) {
+  .sound-btn {
+    width: 24%;
+  }
+}

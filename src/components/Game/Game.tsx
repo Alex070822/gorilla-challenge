@@ -34,10 +34,12 @@ const Game: FC = () => {
   const [gameEnded, setGameEnded] = useState(false);
   const [allMatched, setAllMatched] = useState(false);
 
+  let idCounter = 1;
+
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
-      .map((card) => ({ ...card, id: Math.random() }));
+      .map((card) => ({ ...card, id: idCounter++ }));
     setCards(shuffledCards);
   };
 
@@ -169,7 +171,12 @@ const Game: FC = () => {
               />
             ))}
           </div>
-          <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal
+            show={showModal}
+            onHide={handleCloseModal}
+            aria-labelledby="memory game modal"
+            centered
+          >
             <Modal.Header closeButton>
               <Modal.Title>Message</Modal.Title>
             </Modal.Header>
