@@ -47,8 +47,9 @@ const Game: FC = () => {
     shuffleCards();
   }, []);
 
-  const handleChoice = (card: CardImage): void => {
+  const handleChoice = (card: CardImage): undefined => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+    return undefined;
   };
 
   const handleCloseModal = () => {
@@ -108,7 +109,7 @@ const Game: FC = () => {
     };
   }, []);
 
-  const handleSoundToggle = (): void => {
+  const handleSoundToggle = (): undefined => {
     setIsSoundOn(!isSoundOn);
     if (!isSoundOn) {
       bgAudio.currentTime = 0;
@@ -117,13 +118,14 @@ const Game: FC = () => {
       bgAudio.currentTime = 0;
       bgAudio.pause();
     }
+    return undefined;
   };
 
   const handleGameEnd = () => {
     setGameEnded(true);
   };
 
-  const resetGame = (): void => {
+  const resetGame = (): undefined => {
     setCards([]);
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -133,6 +135,7 @@ const Game: FC = () => {
     setGameEnded(false);
     setAllMatched(false);
     shuffleCards();
+    return undefined;
   };
 
   useEffect(() => {
